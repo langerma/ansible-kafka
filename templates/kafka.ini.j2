@@ -1,6 +1,6 @@
 [program:kafka]
 user={{ kafka_user }}
-command={{ kafka_dir }}/bin/kafka-server-start.sh {{ kafka_dir }}/config/server.properties
+command={{ kafka_dir }}_{{ kafka_scala_version }}-{{ kafka_version }}/bin/kafka-server-start.sh {{ kafka_dir }}/config/server.properties
 autostart=true
 autorestart=true
 environment=JAVA_HOME={{ java_install_dir }}/{{ java_version }},KAFKA_HEAP_OPTS={{ kafka_heap_opts }}
