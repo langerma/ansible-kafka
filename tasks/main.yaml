@@ -111,33 +111,22 @@
   tags:
     - kafka_config
 
-- name: Template Kafka init.d service file
+- name: Template Kafka supervisord service file
   template:
-    src: kafka.initd.j2
-    dest: /etc/init.d/kafka
+    src: kafka.ini.j2
+    dest: "{{ supervisord_ini_dir }}/kafka.ini"
     mode: 0755
   notify:
-    - Reload initd
+    - update supervisord
     - Restart kafka service
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '6'
   tags:
     - kafka_service
 
-- name: Template kafka systemd service file to /usr/lib/systemd/system/kafka.service
-  template:
-    src: kafka.service.j2
-    dest: /usr/lib/systemd/system/kafka.service
-  notify:
-    - Restart kafka systemd
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version > '6'
-  tags:
-    - kafka_service
-
-- name: Install and start the kafka service
-  service:
+- name: Start kafka service
+  supervisorctl: 
     name: kafka
     state: started
-    enabled: yes
+    become: yes
   tags:
     - kafka_service
 
