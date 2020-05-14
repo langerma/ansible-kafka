@@ -10,6 +10,8 @@ kafka_group: kafka
 kafka_root_dir: /app
 kafka_dir: "{{ kafka_root_dir }}/kafka"
 
+kafka_heap_opts: "-Xmx256M -Xms256M"
+
 ############################# Server #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
@@ -46,7 +48,8 @@ kafka_socket_receive_buffer_bytes: 102400
 kafka_socket_request_max_bytes: 104857600
 
 # A comma seperated list of directories under which to store log files
-kafka_log_dirs: "{{ kafka_dir }}/logs"
+kafka_log_dirs: "{{ kafka_dir }}/kafka-logs"
+kafka_log_dir: "{{ kafka_dir }}/log"
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across

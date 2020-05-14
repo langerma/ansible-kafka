@@ -42,6 +42,15 @@
 
 - name: Create directory for kafka log files
   file:
+    path: '{{ kafka_log_dir }}'
+    state: directory
+    group: '{{ kafka_group }}'
+    owner: '{{ kafka_user }}'
+  tags:
+    - kafka_dir
+
+- name: Create directory for kafka log files
+  file:
     path: '{{ kafka_log_dirs }}'
     state: directory
     group: '{{ kafka_group }}'
