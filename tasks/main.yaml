@@ -126,7 +126,6 @@
   supervisorctl: 
     name: kafka
     state: started
-    become: yes
   tags:
     - kafka_service
 
