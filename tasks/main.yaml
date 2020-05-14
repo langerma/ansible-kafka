@@ -58,6 +58,15 @@
   tags:
     - kafka_dirs
 
+- name: Create directory for kafka log files
+  file:
+    path: '{{ kafka_dir }}/config'
+    state: directory
+    group: '{{ kafka_group }}'
+    owner: '{{ kafka_user }}'
+  tags:
+    - kafka_dirs
+
 - name: Template configuration file to server.properties
   template:
     src: server.properties.j2
