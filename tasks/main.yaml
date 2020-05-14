@@ -122,6 +122,9 @@
   tags:
     - kafka_service
 
+- name: "update supervisord"
+  shell: "supervisorctl update"
+  
 - name: Start kafka service
   supervisorctl: 
     name: kafka
