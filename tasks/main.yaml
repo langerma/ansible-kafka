@@ -40,16 +40,6 @@
   tags:
     - kafka_unpack
 
-- name: Create symlink to kafka installation directory
-  file:
-    src: '{{ kafka_root_dir }}/kafka_{{ kafka_scala_version }}-{{ kafka_version }}'
-    dest: '{{ kafka_dir }}'
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_dirs
-
 - name: Create directory for kafka log files
   file:
     path: '{{ kafka_log_dirs }}'
@@ -109,56 +99,6 @@
   template:
     src: consumer.properties.j2
     dest: '{{ kafka_dir }}/config/consumer.properties'
-  tags:
-    - kafka_config
-
-- name: Create symlink to kafka server properties file
-  file:
-    src: '{{ kafka_dir }}/config/server.properties'
-    dest: /etc/kafka/server.properties
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_config
-
-- name: Create symlink to kafka connect standalone properties file
-  file:
-    src: '{{ kafka_dir }}/config/connect-standalone.properties'
-    dest: /etc/kafka/connect-standalone.properties
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_config
-
-- name: Create symlink to kafka connect distributed properties file
-  file:
-    src: '{{ kafka_dir }}/config/connect-distributed.properties'
-    dest: /etc/kafka/connect-distributed.properties
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_config
-
-- name: Create symlink to kafka producer properties file
-  file:
-    src: '{{ kafka_dir }}/config/producer.properties'
-    dest: /etc/kafka/producer.properties
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
-  tags:
-    - kafka_config
-
-- name: Create symlink to kafka consumer properties file
-  file:
-    src: '{{ kafka_dir }}/config/consumer.properties'
-    dest: /etc/kafka/consumer.properties
-    state: link
-    group: '{{ kafka_group }}'
-    owner: '{{ kafka_user }}'
   tags:
     - kafka_config
 

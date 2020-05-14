@@ -7,7 +7,7 @@ kafka_scala_version: 2.12
 kafka_user: kafka
 kafka_group: kafka
 
-kafka_root_dir: /opt
+kafka_root_dir: /app
 kafka_dir: "{{ kafka_root_dir }}/kafka"
 
 ############################# Server #############################
@@ -46,7 +46,7 @@ kafka_socket_receive_buffer_bytes: 102400
 kafka_socket_request_max_bytes: 104857600
 
 # A comma seperated list of directories under which to store log files
-kafka_log_dirs: /var/lib/kafka/logs
+kafka_log_dirs: "{{ kafka_dir }}/logs"
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
