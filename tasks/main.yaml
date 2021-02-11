@@ -67,6 +67,22 @@
   tags:
     - kafka_dirs
 
+- name: 'Copy jmx_prometheus_javaagent to {{ kafka_dir }}'
+  copy:
+    src: 'files/jmx_prometheus_javaagent-0.11.0.jar'
+    dest: '{{ kafka_dir }}/jmx_prometheus_javaagent.jar'
+    group: '{{ kafka_group }}'
+    owner: '{{ kafka_user }}'
+
+- name: Copy prometheus exporter config.yml
+  template:
+    src: config.yml
+    dest: '{{ kafka_dir }}/config/config.yml'
+    owner: '{{ kafka_user }}'
+    group: '{{ kafka_group }}'
+    mode: 0644
+    backup: no
+
 - name: Template configuration file to server.properties
   template:
     src: server.properties.j2
@@ -124,9 +140,9 @@
 
 - name: "update supervisord"
   shell: "supervisorctl update"
-  
+
 - name: Start kafka service
-  supervisorctl: 
+  supervisorctl:
     name: kafka
     state: started
   tags:
